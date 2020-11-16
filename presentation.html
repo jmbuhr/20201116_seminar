@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introduction to a Grammar of Graphics</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jannik Buhr" />
+    <meta name="author" content="Florian Franz" />
+    <meta name="date" content="2020-11-16" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <link href="libs/animate.css/animate.xaringan.css" rel="stylesheet" />
+    <link href="libs/tachyons/tachyons.min.css" rel="stylesheet" />
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"a3532ebe806646408adf36b65e4eb260","expires":14}</script>
+    <script src="libs/himalaya/himalaya.js"></script>
+    <script src="libs/js-cookie/js.cookie.js"></script>
+    <link href="libs/editable/editable.css" rel="stylesheet" />
+    <script src="libs/editable/editable.js"></script>
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="libs/pagedtable/css/pagedtable.css" rel="stylesheet" />
+    <script src="libs/pagedtable/js/pagedtable.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introduction to a Grammar of Graphics
+## And what Tidy Data has to do with all of this
+### Jannik Buhr
+### Florian Franz
+### 2020-11-16
+
+---
+
+
+
+
+&lt;style&gt;
+blockquote {
+  background-color: var(--secondary);
+  border-radius: 10px;
+}
+.caption {
+ color: #404040;
+}
+&lt;/style&gt;
+
+
+## A Data Analysis Workflow
+
+.center.mt6[
+&lt;div class="figure"&gt;
+&lt;img src="img/workflow-wickham.png" alt="Source [1]" width="50%" /&gt;
+&lt;p class="caption"&gt;Source [1]&lt;/p&gt;
+&lt;/div&gt;
+]
+
+---
+
+## The Tidyverse
+
+&lt;iframe src="https://www.tidyverse.org/" width="100%" height="400px"&gt;&lt;/iframe&gt;
+
+---
+class: middle, center
+
+# Tidy Data
+
+---
+
+## Tidy Data
+
+&gt; »Happy families are all alike;&lt;br&gt;
+  every unhappy family is unhappy in its own way.«&lt;br&gt;
+  — Leo Tolstoy
+
+--
+
+&lt;br&gt;
+
+&gt; »Tidy datasets are all alike,&lt;br&gt;
+  but every messy dataset is messy in its own way.«&lt;br&gt;
+  — Hadley Wickham
+
+--
+
+&lt;div class="figure"&gt;
+&lt;img src="img/tidy-data-wickham.png" alt="Source [1]" width="80%" class=external /&gt;
+&lt;p class="caption"&gt;Source [1]&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+## `table1`
+
+&lt;br&gt;
+
+.w-50[
+&lt;div data-pagedtable="false"&gt;
+  &lt;script data-pagedtable-source type="application/json"&gt;
+{"columns":[{"label":["country"],"name":[1],"type":["chr"],"align":["left"]},{"label":["year"],"name":[2],"type":["int"],"align":["right"]},{"label":["cases"],"name":[3],"type":["int"],"align":["right"]},{"label":["population"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"Afghanistan","2":"1999","3":"745","4":"19987071"},{"1":"Afghanistan","2":"2000","3":"2666","4":"20595360"},{"1":"Brazil","2":"1999","3":"37737","4":"172006362"},{"1":"Brazil","2":"2000","3":"80488","4":"174504898"},{"1":"China","2":"1999","3":"212258","4":"1272915272"},{"1":"China","2":"2000","3":"213766","4":"1280428583"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  &lt;/script&gt;
+&lt;/div&gt;
+]
+
+- Number of TB cases documented by
+  the World Health Organization in Afghanistan, Brazil,
+  and China between 1999 and 2000.
+- The first of these tables is in the tidy format, the others are not:
+
+---
+
+## `table2`
+
+&lt;br&gt;
+
+.w-50[
+&lt;div data-pagedtable="false"&gt;
+  &lt;script data-pagedtable-source type="application/json"&gt;
+{"columns":[{"label":["country"],"name":[1],"type":["chr"],"align":["left"]},{"label":["year"],"name":[2],"type":["int"],"align":["right"]},{"label":["type"],"name":[3],"type":["chr"],"align":["left"]},{"label":["count"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"Afghanistan","2":"1999","3":"cases","4":"745"},{"1":"Afghanistan","2":"1999","3":"population","4":"19987071"},{"1":"Afghanistan","2":"2000","3":"cases","4":"2666"},{"1":"Afghanistan","2":"2000","3":"population","4":"20595360"},{"1":"Brazil","2":"1999","3":"cases","4":"37737"},{"1":"Brazil","2":"1999","3":"population","4":"172006362"},{"1":"Brazil","2":"2000","3":"cases","4":"80488"},{"1":"Brazil","2":"2000","3":"population","4":"174504898"},{"1":"China","2":"1999","3":"cases","4":"212258"},{"1":"China","2":"1999","3":"population","4":"1272915272"},{"1":"China","2":"2000","3":"cases","4":"213766"},{"1":"China","2":"2000","3":"population","4":"1280428583"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  &lt;/script&gt;
+&lt;/div&gt;
+]
+
+---
+
+## `table3`
+
+&lt;br&gt;
+
+.w-50[
+&lt;div data-pagedtable="false"&gt;
+  &lt;script data-pagedtable-source type="application/json"&gt;
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["country"],"name":[1],"type":["chr"],"align":["left"]},{"label":["year"],"name":[2],"type":["int"],"align":["right"]},{"label":["rate"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"Afghanistan","2":"1999","3":"745/19987071","_rn_":"1"},{"1":"Afghanistan","2":"2000","3":"2666/20595360","_rn_":"2"},{"1":"Brazil","2":"1999","3":"37737/172006362","_rn_":"3"},{"1":"Brazil","2":"2000","3":"80488/174504898","_rn_":"4"},{"1":"China","2":"1999","3":"212258/1272915272","_rn_":"5"},{"1":"China","2":"2000","3":"213766/1280428583","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  &lt;/script&gt;
+&lt;/div&gt;
+]
+
+---
+
+## `table4a` and `table4b`
+
+&lt;br&gt;
+
+.pull-left.w-40[
+&lt;div data-pagedtable="false"&gt;
+  &lt;script data-pagedtable-source type="application/json"&gt;
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["country"],"name":[1],"type":["chr"],"align":["left"]},{"label":["1999"],"name":[2],"type":["int"],"align":["right"]},{"label":["2000"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"Afghanistan","2":"745","3":"2666","_rn_":"1"},{"1":"Brazil","2":"37737","3":"80488","_rn_":"2"},{"1":"China","2":"212258","3":"213766","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  &lt;/script&gt;
+&lt;/div&gt;
+]
+
+.pull-right.w-40[
+&lt;div data-pagedtable="false"&gt;
+  &lt;script data-pagedtable-source type="application/json"&gt;
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["country"],"name":[1],"type":["chr"],"align":["left"]},{"label":["1999"],"name":[2],"type":["int"],"align":["right"]},{"label":["2000"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"Afghanistan","2":"19987071","3":"20595360","_rn_":"1"},{"1":"Brazil","2":"172006362","3":"174504898","_rn_":"2"},{"1":"China","2":"1272915272","3":"1280428583","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  &lt;/script&gt;
+&lt;/div&gt;
+]
+
+---
+
+## `table5`
+
+&lt;br&gt;
+
+.w-50[
+&lt;div data-pagedtable="false"&gt;
+  &lt;script data-pagedtable-source type="application/json"&gt;
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["country"],"name":[1],"type":["chr"],"align":["left"]},{"label":["century"],"name":[2],"type":["chr"],"align":["left"]},{"label":["year"],"name":[3],"type":["chr"],"align":["left"]},{"label":["rate"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"Afghanistan","2":"19","3":"99","4":"745/19987071","_rn_":"1"},{"1":"Afghanistan","2":"20","3":"00","4":"2666/20595360","_rn_":"2"},{"1":"Brazil","2":"19","3":"99","4":"37737/172006362","_rn_":"3"},{"1":"Brazil","2":"20","3":"00","4":"80488/174504898","_rn_":"4"},{"1":"China","2":"19","3":"99","4":"212258/1272915272","_rn_":"5"},{"1":"China","2":"20","3":"00","4":"213766/1280428583","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  &lt;/script&gt;
+&lt;/div&gt;
+]
+
+---
+class: middle, center
+
+# A Grammar of Graphics 
+
+---
+
+## A Grammar of Graphics
+
+.pull-left[
+&lt;img src="img/tab1.png" width="50%" /&gt;
+
+&lt;img src="img/tab2.png" width="50%" /&gt;
+]
+
+.pull-right[
+&lt;div class="figure"&gt;
+&lt;img src="img/tab3.png" alt="Source [2]" width="1151" /&gt;
+&lt;p class="caption"&gt;Source [2]&lt;/p&gt;
+&lt;/div&gt;
+]
+
+---
+
+## A Grammar of Graphics
+
+&lt;div class="figure"&gt;
+&lt;img src="img/plt.png" alt="Source [3]" width="45%" /&gt;
+&lt;p class="caption"&gt;Source [3]&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+## Sources
+
+1. Wickham, Hadley, and Garrett Grolemund. R for Data Science: Import, Tidy, Transform, Visualize, and Model Data. 1 edition. Sebastopol, CA: O’Reilly Media, 2017. https://r4ds.had.co.nz/.
+2. Wickham, Hadley. “Tidy Data.” Journal of Statistical Software 59, no. 1 (September 12, 2014): 1–23. https://doi.org/10.18637/jss.v059.i10.
+3. Wickham, Hadley. “A Layered Grammar of Graphics.” Journal of Computational and Graphical Statistics 19, no. 1 (January 2010): 3–28. https://doi.org/10.1198/jcgs.2009.07098.
+4. Wilkinson, Leland, D. Wills, D. Rope, A. Norton, and R. Dubbs. The Grammar of Graphics. 2nd edition. New York: Springer, 2005.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"navigation": {
+"scroll": false
+},
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
